@@ -1,0 +1,7 @@
+---
+- hosts: debian
+  roles:
+  - system
+  - oracle-jdk8
+
+

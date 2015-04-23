@@ -1,0 +1,8 @@
+# Setting JAVA_OPTS
+# -----------------
+#JAVA_OPTS="[...] $JAVA_OPTS"
+
+# export env vars for 3rd party libs
+# ----------------------------------
+COMPANY_API_KEY=123abcd
+export COMPANY_API_KEY

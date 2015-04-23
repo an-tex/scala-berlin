@@ -1,0 +1,16 @@
+---
+- hosts: debian
+  tasks:
+  - name: copy .deb
+    copy: src=../target/play_1.0-SNAPSHOT_all.deb dest=/tmp/
+
+  - name: remove existing application
+    sudo: yes
+    apt: name=play state=absent
+
+  - name: install
+    sudo: yes
+    apt: deb=/tmp/play_1.0-SNAPSHOT_all.deb
+
+
+

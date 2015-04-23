@@ -1,0 +1,26 @@
+---
+
+- name: Add the webupd8 APT repository key
+  sudo: yes
+  tags:
+    - java
+    - java-webupd8
+  apt_key: data="{{ lookup('file', 'webupd8.key.asc') }}" state=present
+
+- name: Add the webupd8 APT repository
+  sudo: yes
+  tags:
+    - java
+    - java-webupd8
+  apt_repository: repo="deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" state=present
+
+- name: Automatically select the Oracle License
+  sudo: yes
+  tags: java
+  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+  changed_when: false
+
+- name: Install Oracle Java8
+  sudo: yes
+  tags: java
+  apt: pkg=oracle-java8-installer update-cache=yes state=latest

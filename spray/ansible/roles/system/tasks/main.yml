@@ -1,0 +1,27 @@
+---
+
+- name: Add your public key
+  authorized_key: user=youruser key="{{ item }}"
+  with_file:
+    - youruser.pub
+
+- name: Install common tools
+  sudo: yes
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+   - htop
+   - unzip
+   - curl
+   - telnet
+   - ntp
+   - vim
+
+- name: Set timezone
+  sudo: yes
+  copy: content='Europe/Berlin'
+        dest=/etc/timezone
+        owner=root
+        group=root
+        mode=0644
+  notify:
+      - update timezone

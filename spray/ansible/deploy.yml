@@ -1,0 +1,15 @@
+---
+- hosts: debian
+  tasks:
+  - name: copy .deb
+    copy: src=../target/spray_1.1-SNAPSHOT_all.deb dest=/tmp/
+
+  - name: remove existing application
+    sudo: yes
+    apt: name=spray state=absent
+
+  - name: install spray application
+    sudo: yes
+    apt: deb=/tmp/spray_1.1-SNAPSHOT_all.deb
+
+
